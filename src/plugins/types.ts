@@ -39,6 +39,9 @@ type Options = Partial<{
   /** add custom stuff to body (with hastscript), note: this only is used when there's no document existing yet! */
   customBody?: (hastscript: h) => Array<HChild>;
 
+  /** a custom container around all elements within the body */
+  container?: (hastscript: h) => Element;
+
   /** add an inline script (by default in head, if provided as object modifiable) */
   inlineScript: string | Inline;
 

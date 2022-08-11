@@ -67,7 +67,7 @@ const rehypeVite =
         // prepare document if config exists
         head = h(
           'head',
-          ...(options?.customHead?.(h) ||
+          ...([options?.customHead?.(h)].flat() ||
             ([
               { type: 'text', value: '\n' },
               h('meta', { charset: 'UTF-8' }),
@@ -82,7 +82,7 @@ const rehypeVite =
         );
         body = h(
           'body',
-          ...(options?.customBody?.(h) || []),
+          ...([options?.customBody?.(h)].flat() || []),
           { type: 'text', value: '\n' },
           ...(rootNode.children as unknown as Array<Element>)
         );
@@ -90,6 +90,12 @@ const rehypeVite =
           type: 'text',
           value: '\n',
         });
+
+        if (options?.container) {
+          const container = options.container(h);
+          container.children = body.children;
+          body.children = [container];
+        }
 
         rootNode.children = [
           { type: 'doctype' },
