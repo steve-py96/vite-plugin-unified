@@ -45,7 +45,7 @@ type Config = Partial<{
 type TransformContext = Pick<ResolvedConfig, 'mode' | 'command'> & {
   file: string;
   plugins: {
-    rehypeVite: ReturnType<typeof import('./plugins/rehype-vite').rehypeVite>;
+    rehypeVite: ReturnType<typeof import('./plugins/rehype-vite.js').rehypeVite>;
   };
 };
 type VFile = VFileWithOutput<unknown>;

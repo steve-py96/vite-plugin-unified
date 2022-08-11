@@ -1,8 +1,9 @@
-import type { HChild } from 'hastscript/lib/core';
-
-export type { Options };
+export type { Options, Element, HChild };
 
 type h = typeof import('hastscript').h;
+
+type Element = ReturnType<h>;
+type HChild = Parameters<h>[2];
 
 type WithGeneral<T> = T &
   Partial<{

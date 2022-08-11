@@ -1,12 +1,12 @@
 import type { Plugin, ResolvedConfig } from 'vite';
-import type { Config, Transform, TransformContext, VFile } from './types';
+import type { Config, Transform, TransformContext, VFile } from './types.js';
 import type { DeepRequired } from 'ts-essentials';
 import { basename, join, relative } from 'node:path';
 import { parse as qs } from 'node:querystring';
 import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
-import { pathInfo, log, getCustomTransform, getFilePaths, prepareConfig } from './utils';
-import { PLUGIN_CACHE_HEADER } from './consts';
-import { rehypeVite } from './plugins/rehype-vite';
+import { pathInfo, log, getCustomTransform, getFilePaths, prepareConfig } from './utils.js';
+import { PLUGIN_CACHE_HEADER } from './consts.js';
+import { rehypeVite } from './plugins/rehype-vite.js';
 
 export type { Config as VitePluginUnifiedConfig, Transform, TransformContext };
 export { vitePluginUnified };

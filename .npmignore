@@ -7,4 +7,3 @@ src/
 .prettierrc
 vitest.config.ts
 *.tgz
-types.js

@@ -1,8 +1,8 @@
 import type { DeepRequired } from 'ts-essentials';
-import type { Config, Transform } from './types';
+import type { Config, Transform } from './types.js';
 import type { ResolvedConfig } from 'vite';
 import glob from 'fast-glob';
-import jiti from 'jiti';
+import { default as jiti } from 'jiti';
 import { stat } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 

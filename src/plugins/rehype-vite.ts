@@ -1,8 +1,7 @@
 import type { ResolvedConfig } from 'vite';
 import type { Plugin } from 'unified';
 import type { Parent, Node } from 'unist';
-import type { Element, HChild } from 'hastscript/lib/core';
-import type { Options } from './types';
+import type { Options, Element, HChild } from './types.js';
 import { h } from 'hastscript';
 
 export { rehypeVite };

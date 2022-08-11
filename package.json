@@ -1,8 +1,8 @@
 {
   "name": "vite-plugin-unified",
-  "version": "0.0.1",
-  "type": "module",
+  "version": "0.0.4",
   "license": "UNLICENSED",
+  "type": "module",
   "main": "./index.js",
   "types": "./index.d.ts",
   "scripts": {
@@ -18,22 +18,16 @@
     "jiti": "^1.14.0"
   },
   "peerDependencies": {
-    "unified": "^10.1.2"
+    "unified": "^10.1.2",
+    "vite": "^3.0.5"
   },
   "devDependencies": {
     "@types/node": "^18.6.5",
     "c8": "^7.12.0",
     "prettier": "^2.7.1",
-    "rehype-document": "^6.0.1",
-    "rehype-format": "^4.0.1",
-    "rehype-stringify": "^9.0.3",
-    "remark-parse": "^10.0.1",
-    "remark-rehype": "^10.1.0",
-    "retext-stringify": "^3.1.0",
     "ts-essentials": "^9.2.0",
     "tsx": "^3.8.1",
     "typescript": "^4.7.4",
-    "vite": "^3.0.5",
     "vitest": "^0.21.1"
   },
   "keywords": [
