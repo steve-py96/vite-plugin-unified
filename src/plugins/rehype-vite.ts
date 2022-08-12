@@ -12,7 +12,9 @@ const rehypeVite =
   (resolvedConfig: ResolvedConfig): Plugin<[Options?], Parent> =>
   (options) => {
     return (rootNode) => {
-      const isDocument = rootNode.children[0].type === 'doctype';
+      rootNode.children = rootNode.children || [];
+
+      const isDocument = rootNode.children.length > 0 && rootNode.children[0].type === 'doctype';
       let html: Element = null as unknown as Element;
       let head: Element = null as unknown as Element;
       let body: Element = null as unknown as Element;
@@ -47,7 +49,7 @@ const rehypeVite =
           (item) => item.type === 'element' && (item as Element).tagName === 'html'
         );
 
-        if (!tmpHtml) return console.error('no <html> found in document');
+        if (!tmpHtml) return resolvedConfig.logger.error('no <html> found in document');
 
         html = tmpHtml as Element;
 
@@ -58,8 +60,8 @@ const rehypeVite =
           (item) => item.type === 'element' && item.tagName === 'body'
         );
 
-        if (!tmpHead) return console.error('no <head> found in document');
-        if (!tmpBody) return console.error('no <body> found in document');
+        if (!tmpHead) return resolvedConfig.logger.error('no <head> found in document');
+        if (!tmpBody) return resolvedConfig.logger.error('no <body> found in document');
 
         head = tmpHead as Element;
         body = tmpBody as Element;
