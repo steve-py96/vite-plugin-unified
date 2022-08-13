@@ -29,7 +29,7 @@ For hot-reloading on your processed pages (if your output is HTML) you can inclu
 It injects the vite client in development mode automatically and provides further configurations (see section [rehypeVite](#rehypeVite)).
 For context-based processings (like a dev setup which differs slightly from the prod build) you have also the vite-context within the `vite-plugin-unified` context.
 
-## configuration
+## configuration vite-plugin-unified
 
 (just taken out of [src/types.ts](./src/types.ts)).
 
@@ -103,7 +103,7 @@ vitePluginUnified({
 `rehypeVite` allows you to create the document or add scripts, styles and attributes (to html, head and body only) to an existing document.
 You can additionally control when those scripts / styles should be included (like dev-only, prod-only) since the plugin is aware of the vite-context aswell.
 
-### configuration
+### configuration rehypeVite
 
 (just taken out of [src/types.ts](./src/plugins/types.ts)).
 
@@ -165,6 +165,11 @@ type Options = Partial<{
   styles: string | Style | Array<string | Style>;
 }>;
 ```
+
+## caching in dev
+
+Since transforming a file will most probably always result in the same document there's an in-memory cache within the dev-server by default.
+You can avoid it's from working by disabling it with `server.cache = false` (see [configuration](#configuration-vite-plugin-unified)), by adding `vite-plugin-unified-nocache` to the URL-Query (f.e. `?vite-plugin-unified-nocache`) or by sending the request with `cache-control: no-cache` header (which should be browser default if you hard-reload a page).
 
 ## upcoming
 

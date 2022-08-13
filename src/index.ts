@@ -55,7 +55,10 @@ const vitePluginUnified = (config?: Config): Plugin => {
         if (!CONFIG.extensions.some((ext) => url!.endsWith(ext))) return next();
 
         // query param options
-        const mayCache = CONFIG.server.cache && !('vite-plugin-unified-nocache' in query);
+        const mayCache =
+          CONFIG.server.cache &&
+          !('vite-plugin-unified-nocache' in query) &&
+          request.headers['cache-control'] !== 'no-cache';
 
         if (cache.has(url) && mayCache) {
           return response

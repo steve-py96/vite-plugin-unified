@@ -129,7 +129,7 @@ const rehypeVite =
           if (Array.isArray(options.styles)) {
             options.styles.forEach((item) => {
               if (typeof item === 'string') handleStyle(item, head);
-              else if (item._ignore !== undefined ? !item._ignore : true) {
+              else if (item._ignore === undefined || !item._ignore) {
                 let { _target: target, href, attributes } = item;
                 const parent = target === 'body' ? body : head;
 
@@ -140,7 +140,7 @@ const rehypeVite =
                 handleStyle(href, parent, attributes);
               }
             });
-          } else if (options.styles._ignore !== undefined ? !options.styles._ignore : true) {
+          } else if (options.styles._ignore === undefined || !options.styles._ignore) {
             let { _target: target, href, attributes } = options.styles;
             const parent = target === 'body' ? body : head;
 
@@ -168,7 +168,7 @@ const rehypeVite =
                   type: 'text',
                   value: '\n',
                 });
-              else if (item._ignore !== undefined ? item._ignore : true) {
+              else if (item._ignore === undefined || !item._ignore) {
                 let { _target: target, src, attributes } = item;
                 const parent = target === 'body' ? body : head;
 
@@ -177,7 +177,7 @@ const rehypeVite =
                 parent.children.push(h('script', attributes), { type: 'text', value: '\n' });
               }
             });
-          } else if (options.scripts._ignore !== undefined ? !options.scripts._ignore : true) {
+          } else if (options.scripts._ignore === undefined || !options.scripts._ignore) {
             let { _target: target, src, attributes } = options.scripts;
             const parent = target === 'body' ? body : head;
 
@@ -194,7 +194,7 @@ const rehypeVite =
           head.children.push(h('style', options.inlineStyle), { type: 'text', value: '\n' });
         else if (
           typeof options.inlineStyle === 'object' &&
-          (options.inlineStyle._ignore !== undefined ? options.inlineStyle._ignore : true)
+          (options.inlineStyle._ignore === undefined || !options.inlineStyle._ignore)
         ) {
           const { _target: target, content, attributes } = options.inlineStyle;
           const parent = target === 'body' ? body : head;
@@ -212,7 +212,7 @@ const rehypeVite =
           });
         else if (
           typeof options.inlineScript === 'object' &&
-          (options.inlineScript._ignore !== undefined ? !options.inlineScript._ignore : true)
+          (options.inlineScript._ignore === undefined || !options.inlineScript._ignore)
         ) {
           const { _target: target, content, attributes } = options.inlineScript;
           const parent = target === 'body' ? body : head;
