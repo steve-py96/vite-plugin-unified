@@ -151,7 +151,10 @@ const vitePluginUnified = (config?: Config): Plugin => {
 
       await Promise.all(
         paths.map(async ({ input, output }) => {
-          const customTransform = await getCustomTransform(input, CONFIG.transform.exportName);
+          const customTransform = await getCustomTransform(
+            join(VITE_CONFIG.root, input),
+            CONFIG.transform.exportName
+          );
           let content: unknown = await readFile(input, { encoding: 'utf-8' });
 
           if (typeof customTransform === 'string') throw new Error(customTransform);
