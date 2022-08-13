@@ -86,7 +86,7 @@ vitePluginUnified({
       return await unified()
         .use(remarkParse)
         .use(remarkRehype)
-        .use(context.rehypeVite, {
+        .use(context.plugins.rehypeVite, {
           scripts: '/src/markdownEntry.ts',
         })
         .use(rehypeFormat)
