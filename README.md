@@ -4,6 +4,10 @@
 
 Just a little [vite](https://github.com/vitejs/vite) plugin that works with [unified](https://github.com/unifiedjs/unified).
 
+## playground
+
+[Stackblitz example](https://stackblitz.com/edit/vite-plugin-unified)
+
 ## how to use
 
 1. `npm install -D vite-plugin-unified` / `yarn add -D vite-plugin-unified` / `pnpm add -D vite-plugin-unified`
@@ -104,6 +108,25 @@ You can additionally control when those scripts / styles should be included (lik
 (just taken out of [src/types.ts](./src/plugins/types.ts)).
 
 ```typescript
+export type { Options, Element, HChild };
+
+type h = typeof import('hastscript').h;
+
+type Element = ReturnType<h>;
+type HChild = Parameters<h>[2];
+
+type WithGeneral<T> = T &
+  Partial<{
+    _target: 'head' | 'body';
+    _ignore: boolean;
+    attributes?: Record<string, string>;
+  }>;
+type Script = WithGeneral<{ src: string }>;
+type Style = WithGeneral<{ href: string }>;
+type Inline = WithGeneral<{
+  content: string;
+}>;
+
 type Options = Partial<{
   /** add attributes to html, head and/or body (f.e. lang on html) */
   attributes?: Partial<{
@@ -118,13 +141,16 @@ type Options = Partial<{
   }>;
 
   /** add custom stuff to head (with hastscript), note: this only is used when there's no document existing yet! default here is the vscode emmet html head without title */
-  customHead?: (hastscript: h) => Array<HChild>;
+  customHead?: (hastscript: h) => HChild | Array<HChild>;
 
-  /** add a custom title to the page, note: this only is used when there's no document existing yet! default here is 'unified' */
+  /** add a custom title to the page, note: this only is used when there's no document existing yet and no customHead is used! default here is 'unified' */
   title?: string;
 
   /** add custom stuff to body (with hastscript), note: this only is used when there's no document existing yet! */
-  customBody?: (hastscript: h) => Array<HChild>;
+  customBody?: (hastscript: h) => HChild | Array<HChild>;
+
+  /** a custom container around all elements within the body, note: customBody content also goes into this container! */
+  container?: (hastscript: h) => Element;
 
   /** add an inline script (by default in head, if provided as object modifiable) */
   inlineScript: string | Inline;
@@ -143,4 +169,4 @@ type Options = Partial<{
 ## upcoming
 
 - more tests with vitest (each plugin yet missing)
-- more configurations
+- more configurations?

@@ -69,22 +69,23 @@ const rehypeVite =
         // prepare document if config exists
         head = h(
           'head',
-          ...([options?.customHead?.(h)].flat() ||
-            ([
-              { type: 'text', value: '\n' },
-              h('meta', { charset: 'UTF-8' }),
-              { type: 'text', value: '\n' },
-              h('meta', { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' }),
-              { type: 'text', value: '\n' },
-              h('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }),
-              { type: 'text', value: '\n' },
-              h('title', options?.title || 'unified'),
-              { type: 'text', value: '\n' },
-            ] as unknown as Array<HChild>))
+          ...(options?.customHead
+            ? [options?.customHead?.(h)].flat()
+            : ([
+                { type: 'text', value: '\n' },
+                h('meta', { charset: 'UTF-8' }),
+                { type: 'text', value: '\n' },
+                h('meta', { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' }),
+                { type: 'text', value: '\n' },
+                h('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }),
+                { type: 'text', value: '\n' },
+                h('title', options?.title || 'unified'),
+                { type: 'text', value: '\n' },
+              ] as unknown as Array<HChild>))
         );
         body = h(
           'body',
-          ...([options?.customBody?.(h)].flat() || []),
+          ...(options?.customBody ? [options?.customBody?.(h)].flat() : []),
           { type: 'text', value: '\n' },
           ...(rootNode.children as unknown as Array<Element>)
         );
@@ -123,9 +124,8 @@ const rehypeVite =
         /*
          * external styles
          */
-        if (typeof options.styles === 'string') {
-          handleStyle(options.styles, head);
-        } else if (typeof options.styles === 'object') {
+        if (typeof options.styles === 'string') handleStyle(options.styles, head);
+        else if (typeof options.styles === 'object') {
           if (Array.isArray(options.styles)) {
             options.styles.forEach((item) => {
               if (typeof item === 'string') handleStyle(item, head);

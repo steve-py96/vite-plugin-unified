@@ -31,15 +31,15 @@ type Options = Partial<{
   }>;
 
   /** add custom stuff to head (with hastscript), note: this only is used when there's no document existing yet! default here is the vscode emmet html head without title */
-  customHead?: (hastscript: h) => Array<HChild>;
+  customHead?: (hastscript: h) => HChild | Array<HChild>;
 
-  /** add a custom title to the page, note: this only is used when there's no document existing yet! default here is 'unified' */
+  /** add a custom title to the page, note: this only is used when there's no document existing yet and no customHead is used! default here is 'unified' */
   title?: string;
 
   /** add custom stuff to body (with hastscript), note: this only is used when there's no document existing yet! */
-  customBody?: (hastscript: h) => Array<HChild>;
+  customBody?: (hastscript: h) => HChild | Array<HChild>;
 
-  /** a custom container around all elements within the body */
+  /** a custom container around all elements within the body, note: customBody content also goes into this container! */
   container?: (hastscript: h) => Element;
 
   /** add an inline script (by default in head, if provided as object modifiable) */
