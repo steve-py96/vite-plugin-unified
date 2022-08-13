@@ -84,7 +84,7 @@ const vitePluginUnified = (config?: Config): Plugin => {
             file: relative(VITE_CONFIG.root, filePath),
           });
         else
-          content = customTransform(content as string, {
+          content = await customTransform(content as string, {
             ...transformContext,
             file: relative(VITE_CONFIG.root, filePath),
           });
@@ -159,7 +159,7 @@ const vitePluginUnified = (config?: Config): Plugin => {
               file: relative(VITE_CONFIG.root, input),
             });
           else
-            content = (exports[CONFIG.transform.exportName] as Transform)(content as string, {
+            content = await customTransform(content as string, {
               ...transformContext,
               file: relative(VITE_CONFIG.root, input),
             });

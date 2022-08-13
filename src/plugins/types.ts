@@ -7,8 +7,13 @@ type HChild = Parameters<h>[2];
 
 type WithGeneral<T> = T &
   Partial<{
+    /** the target tag to render the script / style into */
     _target: 'head' | 'body';
+
+    /** true if the script / style should not be rendered (useful in combination with context.command f.e.) */
     _ignore: boolean;
+
+    /** attributes for the script / style, note: src / href will be used no matter if they're defined here again or differently */
     attributes?: Record<string, string>;
   }>;
 type Script = WithGeneral<{ src: string }>;
